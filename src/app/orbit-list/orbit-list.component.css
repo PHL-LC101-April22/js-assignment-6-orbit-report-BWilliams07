@@ -7,6 +7,9 @@
 	background-color: #da8a8a;
 }
 
+.colorForEven {
+	background-color: lightseagreen;
+}
 table {
  color: #111;
  border-radius: 5px;
