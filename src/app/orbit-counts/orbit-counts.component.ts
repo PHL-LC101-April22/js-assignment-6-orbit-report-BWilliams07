@@ -8,8 +8,8 @@ import { Satellite } from '../satellite';
 })
 export class OrbitCountsComponent implements OnInit {
 
-	@Input() satellites: Satellite
-  categories: string[] = ['Total', 'Space Debris', 'Communication', 'Probe', 'Positioning', 'Space Station', 'Telescope'];
+	@Input() satellites: Satellite[];
+  countItems: string[] = ['Total:', 'Communication:', 'Probe:', 'Space Station:', 'Telescope:', 'Positioning:', 'Space Debris:'];
 
   constructor() { }
 
@@ -18,7 +18,8 @@ export class OrbitCountsComponent implements OnInit {
 
   countByType(type: string): number {
 	let count = 0;
-	if (this.satellites) {
+   type = type.substring(0,type.length-1);
+	if (this.satellites && type !== 'Total') {
 	  for (let i = 0; i < this.satellites.length; i++) {
 		 if (this.satellites[i].type === type) {
 			count++;
@@ -26,6 +27,10 @@ export class OrbitCountsComponent implements OnInit {
 	  }
 	}
 	return count;
+ } else {
+		return this.satellites.length;
+	}
+	
  }
 
 
