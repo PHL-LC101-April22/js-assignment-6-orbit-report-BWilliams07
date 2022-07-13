@@ -1,41 +1,46 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Satellite } from '../satellite';
+import { Component } from '@angular/core';
+import { Satellite } from './satellite';
 
 @Component({
-  selector: 'app-orbit-list',
-  templateUrl: './orbit-list.component.html',
-  styleUrls: ['./orbit-list.component.css']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
+export class AppComponent {
+  title = 'orbit-report';
+  sourceList: Satellite[];
+  displayList: Satellite[];
 
-export class OrbitListComponent implements OnInit {
+  constructor() {
+    this.sourceList = [];
+    this.displayList = [];
+    let satellitesUrl = 'https://handlers.education.launchcode.org/static/satellites.json';
 
-  @Input() satellites: Satellite[];
+    window.fetch(satellitesUrl).then(function (response) {
+      response.json().then(function (data) {
+        let fetchedSatellites = data.satellites;
+        for (let i = 0; i < fetchedSatellites.length; i++) {
+          this.sourceList.push(new Satellite(fetchedSatellites[i].name, fetchedSatellites[i].type, fetchedSatellites[i].launchDate, fetchedSatellites[i].orbitType, fetchedSatellites[i].operational));
+        }
+        this.displayList = this.sourceList.slice(0);
+      }.bind(this));
+    }.bind(this));
 
-
-
-  constructor() { }
-
-  ngOnInit() {
   }
 
-  isEven(satellite: Satellite): boolean {
-	if ((this.satellites.indexOf(satellite)+1) % 2 === 1) {
-		return true;
-	} else {
-		return false;
-	}
+  search(searchTerm: string): void {
+    let matchingSatellites: Satellite[] = [];
+    searchTerm = searchTerm.toLowerCase();
+    for (let i = 0; i < this.sourceList.length; i++) {
+      let name = this.sourceList[i].name.toLowerCase();
+      let orbitType = this.sourceList[i].orbitType.toLowerCase();
+      let type = this.sourceList[i].type.toLowerCase();
+      if (name.indexOf(searchTerm) >= 0 || orbitType.indexOf(searchTerm) >= 0 || type.indexOf(searchTerm) >= 0) {
+        matchingSatellites.push(this.sourceList[i]);
+      }
+    }
+    // assign this.displayList to be the the array of matching satellites
+    // this will cause Angular to re-make the table, but now only containing matches
+    this.displayList = matchingSatellites;
   }
-
-	sort(column: string): void {
-		// array.sort modifies the array, sorting the items based on the given compare function
-		this.satellites.sort(function (a: Satellite, b: Satellite): number {
-			if (a[column] < b[column]) {
-				return -1;
-			} else if (a[column] > b[column]) {
-				return 1;
-			}
-			return 0;
-		});
-	}
-
 }
