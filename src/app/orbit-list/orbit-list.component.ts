@@ -10,10 +10,17 @@ import { Satellite } from '../satellite';
 export class OrbitListComponent implements OnInit {
 
   @Input() satellites: Satellite[];
-  categories: string[] = ['Total', 'Space Debris', 'Communication', 'Probe', 'Positioning', 'Space Station', 'Telescope'];
+  
   constructor() { }
 
   ngOnInit() {
+    
+  isEven(satellite: Satellite): boolean {
+	if ((this.satellites.indexOf(satellite)+1) % 2 === 1) {
+		return true;
+	} else {
+		return false;
+	}
   }
 
 	sort(column: string): void {
