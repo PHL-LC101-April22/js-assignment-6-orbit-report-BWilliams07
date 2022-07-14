@@ -19,7 +19,7 @@ export class OrbitListComponent implements OnInit {
   }
 
   isEven(satellite: Satellite): boolean {
-	if ((this.satellites.indexOf(satellite) % 2 === 1) {
+	if ((this.satellites.indexOf(satellite % 2)) {
 		return true;
 	} else {
 		return false;
