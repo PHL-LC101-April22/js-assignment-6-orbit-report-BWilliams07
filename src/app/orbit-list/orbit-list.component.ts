@@ -18,13 +18,7 @@ export class OrbitListComponent implements OnInit {
   ngOnInit() {
   }
 
-  isEven(satellite: Satellite): boolean {
-	if ((this.satellites.indexOf(satellite)+1) % 2 === 1) {
-		return true;
-	} else {
-		return false;
-	}
-  }
+  
 
 	sort(column: string): void {
 		// array.sort modifies the array, sorting the items based on the given compare function
