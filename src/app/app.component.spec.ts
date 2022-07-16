@@ -37,6 +37,4 @@ describe('AppComponent', () => {
 	const compiled = fixture.debugElement.nativeElement;
 	expect(compiled.querySelector('app-orbit-list')).not.toBe(null);
  }));
-
-
 });
