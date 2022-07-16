@@ -34,17 +34,17 @@ describe('OrbitListComponent', () => {
 		component.satellites = [new Satellite("Cat Scanner", "Imaging", "2012-01-05", "LOW", true)];
 		fixture.detectChanges();
 		let numDataRows = element.queryAll(By.css('.data-row')).length;
-		expect(numDataRows).toBe(1);
+		expect(numDataRows).toEqual(1);
 
 		component.satellites = [new Satellite("Cat Scanner", "Imaging", "2012-01-05", "LOW", true), new Satellite("Cat Scanner", "Imaging", "2012-01-05", "LOW", true)];
 		fixture.detectChanges();
 		numDataRows = element.queryAll(By.css('.data-row')).length;
-		expect(numDataRows).toBe(2);
+		expect(numDataRows).toEqual(2);
 
 		component.satellites = [];
 		fixture.detectChanges();
 		numDataRows = element.queryAll(By.css('.data-row')).length;
-		expect(numDataRows).toBe(0);
+		expect(numDataRows).toEqual(0);
 
 	});
 
