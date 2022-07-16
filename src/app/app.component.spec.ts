@@ -1,86 +1,42 @@
-import { Component } from '@angular/core';
-import { Satellite } from './satellite';
+import { DebugElement } from '@angular/core';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+import { OrbitCountsComponent } from './orbit-counts/orbit-counts.component';
+import { OrbitListComponent } from './orbit-list/orbit-list.component';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent {
-  title = 'orbit-report';
+describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let element: DebugElement;
 
-  sourceList: Satellite[];
-  displayList: Satellite[];
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent,
+		  OrbitListComponent,
+		  OrbitCountsComponent
+      ],
+    }).compileComponents();
+  }));
 
-	constructor() {
-		this.sourceList = [];
-		this.displayList = [];
-		let satellitesUrl = 'https://handlers.education.launchcode.org/static/satellites.json';
+  beforeEach(() => {
+	fixture = TestBed.createComponent(AppComponent);
+	component = fixture.debugElement.componentInstance;
+	element = fixture.debugElement;
 
-		window.fetch(satellitesUrl).then(function (response) {
-			response.json().then(function (data) {
+	fixture.detectChanges();
+ });
 
-				let fetchedSatellites = data.satellites;
-				for(let i=0; i < fetchedSatellites.length; i++) {
-					let satellite = new Satellite(fetchedSatellites[i].name, fetchedSatellites[i].type, fetchedSatellites[i].launchDate, fetchedSatellites[i].orbitType, fetchedSatellites[i].operational);
-					this.sourceList.push(satellite);
-				 }
-        
-				 this.displayList = this.sourceList.slice(0);
-	  
-			}.bind(this));
-		}.bind(this));
-	}
+ it('should create', () => {
+	expect(component).toBeTruthy();
+ });
 
-	search(searchTerm: string, name: boolean, type: boolean, operational: boolean, orbitType: boolean, launchDate: boolean ): void {
-		let matchingSatellites: Satellite[] = [];
-		searchTerm = searchTerm.toLowerCase();
-		//console.log(searchKind);
-    
-		if (name) {
-			for(let i=0; i < this.sourceList.length; i++) {
-				let name = this.sourceList[i].name.toLowerCase();
-				if (name.indexOf(searchTerm) >= 0) {
-					matchingSatellites.push(this.sourceList[i]);
-				}
-			}
-		}
+ it('should contain the list component', async(() => {
+	const fixture = TestBed.createComponent(AppComponent);
+	fixture.detectChanges();
+	const compiled = fixture.debugElement.nativeElement;
+	expect(compiled.querySelector('app-orbit-list')).not.toBe(null);
+ }));
 
-		if (operational) {
-			for(let i=0; i < this.sourceList.length; i++) {
-				let operational = String(this.sourceList[i].operational);
-				if (operational.indexOf(searchTerm) >= 0) {
-					matchingSatellites.push(this.sourceList[i]);
-				}
-			}
-		}
 
-		if (type) {
-			for(let i=0; i < this.sourceList.length; i++) {
-				let type = this.sourceList[i].type.toLowerCase();
-				if (type.indexOf(searchTerm) >= 0) {
-					matchingSatellites.push(this.sourceList[i]);
-				}
-			}
-		}
-
-		if (orbitType) {
-			for(let i=0; i < this.sourceList.length; i++) {
-				let orbitType = this.sourceList[i].orbitType.toLowerCase();
-				if (orbitType.indexOf(searchTerm) >= 0) {
-					matchingSatellites.push(this.sourceList[i]);
-				}
-			}
-		}
-
-		if (launchDate) {
-			for(let i=0; i < this.sourceList.length; i++) {
-				let launchDate = this.sourceList[i].launchDate.toLowerCase();
-				if (launchDate.indexOf(searchTerm) >= 0) {
-					matchingSatellites.push(this.sourceList[i]);
-				}
-			}
-		}
-		this.displayList = matchingSatellites;
-	}
-}
+});
