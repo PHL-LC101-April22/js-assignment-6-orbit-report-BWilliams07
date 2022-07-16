@@ -30,7 +30,6 @@ export class AppComponent {
 	  
 			}.bind(this));
 		}.bind(this));
-
 	}
 
 	search(searchTerm: string, name: boolean, type: boolean, operational: boolean, orbitType: boolean, launchDate: boolean ): void {
@@ -83,6 +82,4 @@ export class AppComponent {
 		}
 		this.displayList = matchingSatellites;
 	}
-
-
 }
