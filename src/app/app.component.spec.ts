@@ -36,7 +36,8 @@ export class AppComponent {
 		let matchingSatellites: Satellite[] = [];
 		searchTerm = searchTerm.toLowerCase();
 		//console.log(searchKind);
-		if (byName) {
+    
+		if (name) {
 			for(let i=0; i < this.sourceList.length; i++) {
 				let name = this.sourceList[i].name.toLowerCase();
 				if (name.indexOf(searchTerm) >= 0) {
