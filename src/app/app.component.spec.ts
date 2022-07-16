@@ -21,15 +21,11 @@ export class AppComponent {
 			response.json().then(function (data) {
 
 				let fetchedSatellites = data.satellites;
-				// loop over satellites
 				for(let i=0; i < fetchedSatellites.length; i++) {
-					// create a Satellite object 
 					let satellite = new Satellite(fetchedSatellites[i].name, fetchedSatellites[i].type, fetchedSatellites[i].launchDate, fetchedSatellites[i].orbitType, fetchedSatellites[i].operational);
-					// add the new Satellite object to sourceList 
 					this.sourceList.push(satellite);
 				 }
-
-				 // make a copy of the sourceList to be shown to the user
+        
 				 this.displayList = this.sourceList.slice(0);
 	  
 			}.bind(this));
@@ -50,7 +46,7 @@ export class AppComponent {
 			}
 		}
 
-		if (byOperational) {
+		if (operational) {
 			for(let i=0; i < this.sourceList.length; i++) {
 				let operational = String(this.sourceList[i].operational);
 				if (operational.indexOf(searchTerm) >= 0) {
@@ -59,7 +55,7 @@ export class AppComponent {
 			}
 		}
 
-		if (byType) {
+		if (type) {
 			for(let i=0; i < this.sourceList.length; i++) {
 				let type = this.sourceList[i].type.toLowerCase();
 				if (type.indexOf(searchTerm) >= 0) {
@@ -68,7 +64,7 @@ export class AppComponent {
 			}
 		}
 
-		if (byOrbitType) {
+		if (orbitType) {
 			for(let i=0; i < this.sourceList.length; i++) {
 				let orbitType = this.sourceList[i].orbitType.toLowerCase();
 				if (orbitType.indexOf(searchTerm) >= 0) {
@@ -77,7 +73,7 @@ export class AppComponent {
 			}
 		}
 
-		if (byLaunchDate) {
+		if (launchDate) {
 			for(let i=0; i < this.sourceList.length; i++) {
 				let launchDate = this.sourceList[i].launchDate.toLowerCase();
 				if (launchDate.indexOf(searchTerm) >= 0) {
