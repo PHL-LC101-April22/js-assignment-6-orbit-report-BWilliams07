@@ -10,7 +10,7 @@ export class OrbitCountsComponent implements OnInit {
 
 	@Input() satellites: Satellite[];
 
-	items: string[] = ['Total:', 'Communication:', 'Probe:', 'Space Station:', 'Telescope:', 'Positioning:', 'Space Debris:'];
+	countItems: string[] = ['Total:', 'Communication:', 'Probe:', 'Space Station:', 'Telescope:', 'Positioning:', 'Space Debris:'];
 
   constructor() { }
 
