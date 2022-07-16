@@ -33,7 +33,7 @@ export class AppComponent {
 
 	}
 
-	search(searchTerm: string, byName: boolean, byType: boolean, operational: boolean, orbitType: boolean, launchDate: boolean ): void {
+	search(searchTerm: string, name: boolean, type: boolean, operational: boolean, orbitType: boolean, launchDate: boolean ): void {
 		let matchingSatellites: Satellite[] = [];
 		searchTerm = searchTerm.toLowerCase();
 		//console.log(searchKind);
