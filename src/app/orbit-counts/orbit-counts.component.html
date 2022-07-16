@@ -1,7 +1,7 @@
 <h3>Satellite Count:</h3>
 <div class="counts">
 	<div *ngFor = "let category of categories">{{ category.substring(0,item.length-1) }} 
-		<span class="counts-total">{{ typeCount(category) }}</span>
+		<span class="counts-total">{{ countByType(category) }}</span>
 	</div>
 </div>
 
