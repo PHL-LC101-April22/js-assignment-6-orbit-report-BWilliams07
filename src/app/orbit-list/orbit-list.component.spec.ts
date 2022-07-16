@@ -3,6 +3,7 @@ import { OrbitListComponent } from './orbit-list.component';
 import { Satellite } from '../satellite';
 import { By } from "@angular/platform-browser";
 import { DebugElement } from '@angular/core';
+s
 
 describe('OrbitListComponent', () => {
 	let component: OrbitListComponent;
