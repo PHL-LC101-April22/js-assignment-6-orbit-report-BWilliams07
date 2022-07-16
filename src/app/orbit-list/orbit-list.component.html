@@ -1,11 +1,17 @@
 <table>
-    <div class="counts" >
-   <div>Total: <span>{{satellites.length}}</span></div>
-   <div>Space Debris: <span>{{findType(satellites, "Space Debris")}}</span></div>
-   <div>Communication: <span>{{findType(satellites, "Communication")}}</span></div>
-   <div>Probe: <span>{{findType(satellites, "Probe")}}</span></div>
-   <div>Positioning: <span>{{findType(satellites, "Positioning")}}</span></div>
-   <div>Space Station: <span>{{findType(satellites, "Space Station")}}</span></div>
-   <div>Telescope: <span>{{findType(satellites, "Telescope")}}</span></div>
+   <tr class="header-row">
+        <th (click)="sort('name')" class="sortable">Name</th>
+        <th (click)="sort('type')" class="sortable">Type</th>
+        <th>Operational</th>
+        <th>Orbit Type</th>
+        <th>Launch Date</th>
+    </tr>
+    <tr class = "data-row" [class.colorForEven]="isEven(satellite)" *ngFor = "let satellite of satellites">
+        <td>{{ satellite.name }}</td>
+        <td [class.warning] = "satellite.isSpaceDebris()">{{ satellite.type }}</td>
+        <td>{{ satellite.operational }}</td>
+        <td>{{ satellite.orbitType }}</td>
+        <td>{{ satellite.launchDate }}</td>
+    </tr>
 </table>
 
